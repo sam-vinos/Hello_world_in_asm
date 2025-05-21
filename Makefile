@@ -1,12 +1,13 @@
-NAME=hello
+NAME=goodbye
+LIST_CLEAN=$(NAME).o $(NAME)
 
 
 all: $(NAME)
 
 $(NAME): $(NAME).s
-	as $^ -o $(NAME).o
-	ld $(NAME).o -o $@
-
+	as -o $(NAME).o $(NAME).s && ld -o $(NAME) $(NAME).o
 
 clean:
-	rm $(NAME).o $(NAME)
+	rm -f $(LIST_CLEAN)
+
+rebuild: clean all
